@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+           <layout class="org.apache.log4j.PatternLayout">
+             <param name="ConversionPattern"
+		    value="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+           </layout>	    
+	</appender>
+	
+	<appender name="debug_file"  
+        class="org.apache.log4j.RollingFileAppender">  
+        <param name="File" value="${com.sun.aas.instanceRoot}/logs/abw.log" />  
+        <param name="MaxFileSize" value="10000000" />  
+        <param name="MaxBackupIndex" value="31" />  
+  
+        <layout class="org.apache.log4j.PatternLayout">  
+            <param name="ConversionPattern"  
+                value="%n%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%l] %n%m%n" />  
+        </layout>  
+    </appender>
+	
+	<logger name="com.opensymphony">
+		<level value="INFO" />
+	</logger>
+		
+	<logger name="org.apache.struts2">
+		<level value="INFO" />
+	</logger>
+		
+	<category name="org.apache.log4j.xml">
+	  <priority value="info" />
+	</category>
+	
+	<category name="com.wellcom">  
+        <priority value="debug" />  
+        <appender-ref ref="debug_file" />  
+    </category>
+    
+	<root>
+	   <priority value ="INFO" />
+   	   <appender-ref ref="STDOUT" />
+	</root>
+	
+</log4j:configuration>

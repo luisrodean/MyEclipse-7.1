@@ -1,0 +1,75 @@
+package com.wellcom.hibernate.model;
+
+/**
+ * SecTblEscuela entity. @author MyEclipse Persistence Tools
+ */
+
+public class SecTblEscuela implements java.io.Serializable {
+
+	// Fields
+
+	private String idEscuela;
+	private String pw;
+	private String nombre;
+	private String direccion;
+	private Integer telefono;
+
+	// Constructors
+
+	/** default constructor */
+	public SecTblEscuela() {
+	}
+
+	/** full constructor */
+	public SecTblEscuela(String idEscuela, String pw, String nombre,
+			String direccion, Integer telefono) {
+		this.idEscuela = idEscuela;
+		this.pw = pw;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.telefono = telefono;
+	}
+
+	// Property accessors
+
+	public String getIdEscuela() {
+		return this.idEscuela;
+	}
+
+	public void setIdEscuela(String idEscuela) {
+		this.idEscuela = idEscuela;
+	}
+
+	public String getPw() {
+		return this.pw;
+	}
+
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public Integer getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(Integer telefono) {
+		this.telefono = telefono;
+	}
+
+}

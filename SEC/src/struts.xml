@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts SYSTEM "struts-2.0.dtd">
+
+<struts>
+	<!-- CAMBIAR LA LINEA SIGUIENTE A FALSE CUANDO SE PASE A PRODUCCIÓN -->
+	<constant name="struts.devMode" value="false" />
+	<!-- ESTA LÍNEA SE AGREGA PARA LA INTERNACIONALIZACIÓN (INVESTIGAR) -->
+	<constant name="struts.custom.i18n.resources" value="global" />
+	<!--
+		ESTA LÍNEA SE AGREGA POR RECOMENDACIÓN DE LOS DESARROLLADORES DE
+		STRUTS2
+	-->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!--
+		ESTA LÍNEA SE AGREGA PARA CAMBIAR EL RESULT PATH QUE SE ESTABLECE POR
+		DEFAULT
+	-->
+	<constant name="struts.convention.result.path" value="/" />
+	<!--
+		ESTA LÍNEA SE AGREGA PARA QUE SE RECONOZCA EL PAQUETE POR DEFAULT
+		UTILIZADO
+	-->
+	<constant name="struts.convention.default.parent.package"
+		value="basicstruts2" />
+	<!--
+		ESTA LÍNEA SE AGREGA PARA QUE LAS DIRECCIONES QUE EMPIECEN CON
+		"/frameset" NO PASEN POR EL FILTRO DE STRUTS2 (TODOS LOS REPORTES)
+	-->
+
+	<!-- <constant name="struts.action.excludePattern" value="/"/>  -->
+	<!--
+		ESTA LÍNEA SE AGREGA PARA QUE LAS DIRECCIONES QUE EMPIECEN CON
+		"/servlet/ServletReporte" NO PASEN POR EL FILTRO DE STRUTS2 (TODOS LOS
+		REPORTES)
+	-->
+	<constant name="struts.action.excludePattern" value="/servlet/ServletReporte" />
+	<!--
+		ESTA LÍNEA SE AGREGA PARA AUMENTAR EL TAMAÑO DE ARCHIVOS ACEPTADOS
+		PARA SU CARGA (POR DEFAULT ESTÁ CONFIGURADO A 2 MB)
+	-->
+	<constant name="struts.multipart.maxSize" value="10000000" />
+	<!--
+		<constant name="struts.action.excludePattern"
+		value="/GenerarArchivoXLS"/>
+	-->
+	<!-- ESTA LÍNEA SE AGREGA PARA OCULTAR ACTIONS EN EL PATH -->
+	<constant name="struts.action.extension" value="," />
+	<!-- ESTA LÍNEA SE AGREGA PARA CREAR ARCHIVO TEMPORAL -->
+	<constant name="struts.multipart.saveDir" value="/tmp" />
+
+	<package name="basicstruts2" namespace="/"
+		extends="struts-default,json-default">
+
+
+
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+
+
+		<!--
+			******************************************** ********* MANEJO DEL
+			NIVEL DEL LOG ********* ********************************************
+		-->
+		<interceptors>
+			<interceptor-stack name="appDefaultStack">
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">ERROR</param>
+				</interceptor-ref>
+				
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="appDefaultStack" />
+
+
+
+		
+
+		<!--
+			********************************************** ********* MANEJO DE
+			EXCEPCIONES ********** **********************************************
+		-->
+		<global-results>
+			<result name="securityerror">/securityerror.jsp</result>
+			<result name="error">/errorPage.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping
+				exception="org.apache.struts.register.exceptions.SecurityBreachException"
+				result="securityerror" />
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+
+
+		<!--
+			***************************************** ********* MAPEO DE LAS ACCIONES **************************************************
+		-->
+		<!-- ******************************** ACTIONS PARA CARGAR LA PANTALLA SEGUN EL MENU ************************************** -->
+		
+		<action name="menuCargaCalificacion" method="execute" class="com.wellcom.actions.CargaArchivoCalificacion">
+			<result name="pantallaCargaCalificacion" type="tiles">pantallaCargaCalificacion</result>
+		</action>
+		<action name="menuGestionUsuarios" method="execute" class="com.wellcom.actions.GestionUsuarios">
+			<result name="pantallaGestionUsuarios" type="tiles"> pantallaGestionUsuarios</result>
+		</action>
+		<action name="menuGestionCalificaciones" method="execute" class="com.wellcom.actions.GestionCalificaciones">
+			<result name="pantallaGestionCalificaciones" type="tiles"> pantallaGestionCalificaciones</result>
+		</action>
+		<action name="menuDictamenCCambiario" method="execute" class="com.wellcom.actions.DictamenCCambiario">
+			<result name="pantallaDictamenCCambiario" type="tiles">pantallaDictamenCCambiario</result>
+		</action>
+		<action name="menuListaCalificaciones" method="execute" class="com.wellcom.actions.ListaCalificaciones">
+			<result name="pantallaListaCalificaciones" type="tiles">pantallaListaCalificaciones</result>
+		</action>
+		
+		<!-- ******************************** ACTIONS PARA CARGA ARCHIVOS ************************************** -->
+		<action name="cargaArchivoCalificacion" method="cargaArchivoCalificacion" class="com.wellcom.actions.CargaArchivoCalificacion">
+			<result name="success" type="tiles">pantallaCargaCalificacion</result>
+		</action>
+		
+		<!-- ******************************** ACTIONS PARA BBUSQUEDAS ************************************** -->
+		
+	</package>
+
+	<!--<package name="default" extends="struts-default">
+		
+	</package>-->
+
+</struts>
+

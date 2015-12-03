@@ -1,0 +1,44 @@
+package com.wellcom.hibernate.model;
+
+/**
+ * SecTblGrupo entity. @author MyEclipse Persistence Tools
+ */
+
+public class SecTblGrupo implements java.io.Serializable {
+
+	// Fields
+
+	private Integer idGrupo;
+	private String grupo;
+
+	// Constructors
+
+	/** default constructor */
+	public SecTblGrupo() {
+	}
+
+	/** full constructor */
+	public SecTblGrupo(Integer idGrupo, String grupo) {
+		this.idGrupo = idGrupo;
+		this.grupo = grupo;
+	}
+
+	// Property accessors
+
+	public Integer getIdGrupo() {
+		return this.idGrupo;
+	}
+
+	public void setIdGrupo(Integer idGrupo) {
+		this.idGrupo = idGrupo;
+	}
+
+	public String getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
+	}
+
+}

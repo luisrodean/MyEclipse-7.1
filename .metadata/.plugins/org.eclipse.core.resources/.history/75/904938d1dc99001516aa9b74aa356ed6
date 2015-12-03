@@ -1,0 +1,78 @@
+package com.wellcom.hibernate.model;
+
+
+
+/**
+ * AbstractSecTblUsuario entity provides the base persistence definition of the SecTblUsuario entity. @author MyEclipse Persistence Tools
+ */
+
+public abstract class AbstractSecTblUsuario  implements java.io.Serializable {
+
+
+    // Fields    
+
+     private String idUsuario;
+     private SecTblEscuela secTblEscuela;
+     private String pw;
+     private Integer rol;
+
+
+    // Constructors
+
+    /** default constructor */
+    public AbstractSecTblUsuario() {
+    }
+
+    
+    /** full constructor */
+    public AbstractSecTblUsuario(String idUsuario, SecTblEscuela secTblEscuela, String pw, Integer rol) {
+        this.idUsuario = idUsuario;
+        this.secTblEscuela = secTblEscuela;
+        this.pw = pw;
+        this.rol = rol;
+    }
+
+   
+    // Property accessors
+
+    public String getIdUsuario() {
+        return this.idUsuario;
+    }
+    
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public SecTblEscuela getSecTblEscuela() {
+        return this.secTblEscuela;
+    }
+    
+    public void setSecTblEscuela(SecTblEscuela secTblEscuela) {
+        this.secTblEscuela = secTblEscuela;
+    }
+
+    public String getPw() {
+        return this.pw;
+    }
+    
+    public void setPw(String pw) {
+        this.pw = pw;
+    }
+
+    public Integer getRol() {
+        return this.rol;
+    }
+    
+    public void setRol(Integer rol) {
+        this.rol = rol;
+    }
+   
+
+
+
+
+
+
+
+
+}

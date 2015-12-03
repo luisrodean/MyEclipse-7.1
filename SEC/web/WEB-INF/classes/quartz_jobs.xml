@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<quartz>
+    <job>
+        <job-detail>
+            <name>quartzJob</name>
+            <group>quartzJobs</group>
+            <!-- clase donde se define el trabajo a realizar -->
+            <job-class>com.wellcom.quartz.QuartzJob</job-class>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>quartzTrigger</name>
+                <group>quartzTriggers</group>
+                <job-name>quartzJob</job-name>
+                <job-group>quartzJobs</job-group>
+                <!-- Se dispara cada segundo -->
+                <cron-expression>0 0/5 * * * ?</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+    
+</quartz>

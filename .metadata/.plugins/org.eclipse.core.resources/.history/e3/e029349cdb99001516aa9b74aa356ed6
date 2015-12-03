@@ -1,0 +1,44 @@
+package com.wellcom.hibernate.model;
+
+/**
+ * SecTblProfesorTutor entity. @author MyEclipse Persistence Tools
+ */
+
+public class SecTblProfesorTutor implements java.io.Serializable {
+
+	// Fields
+
+	private String idProfesor;
+	private Integer idAlumnoGrupo;
+
+	// Constructors
+
+	/** default constructor */
+	public SecTblProfesorTutor() {
+	}
+
+	/** full constructor */
+	public SecTblProfesorTutor(String idProfesor, Integer idAlumnoGrupo) {
+		this.idProfesor = idProfesor;
+		this.idAlumnoGrupo = idAlumnoGrupo;
+	}
+
+	// Property accessors
+
+	public String getIdProfesor() {
+		return this.idProfesor;
+	}
+
+	public void setIdProfesor(String idProfesor) {
+		this.idProfesor = idProfesor;
+	}
+
+	public Integer getIdAlumnoGrupo() {
+		return this.idAlumnoGrupo;
+	}
+
+	public void setIdAlumnoGrupo(Integer idAlumnoGrupo) {
+		this.idAlumnoGrupo = idAlumnoGrupo;
+	}
+
+}

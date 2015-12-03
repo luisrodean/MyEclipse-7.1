@@ -1,0 +1,10 @@
+<div id="bar" >
+  <nav>
+    <div class="nav-wrapper">
+      <a href="pics/icons/salir.png" class="brand-logo">Logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="salir"><img src="pics/icons/salir.png"></img></a></li>
+      </ul>
+    </div>
+  </nav>
+</div>

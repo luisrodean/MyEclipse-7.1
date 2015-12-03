@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DictamenCC" language="groovy" pageWidth="612" pageHeight="800" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="20" uuid="427ba35b-8aee-49d4-b217-b41d195a99e6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<pen lineStyle="Double"/>
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#E6F3FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="adeudos" uuid="b5245a67-56f8-4be2-bd86-1fbdf7519e60">
+		<parameter name="casfim" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select anio,total from cnbv.tbl_adeudos where casfim=$P!{casfim}]]>
+		</queryString>
+		<field name="anio" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="total" class="java.lang.Float">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<variable name="mtotal" class="java.lang.Number" calculation="Sum">
+			<variableExpression><![CDATA[$F{total}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="Accionistas" uuid="5d825974-107f-4ca7-868e-2953b14f9022">
+		<property name="casfim" value="$P!{casfim}"/>
+		<parameter name="casfim" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{casfim}]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select nombre nomAcc, apellido_paterno apatAcc, apellido_materno amatAcc
+from tbl_accionistas
+where casfim=$P!{casfim}]]>
+		</queryString>
+		<field name="nomAcc" class="java.lang.String"/>
+		<field name="apatAcc" class="java.lang.String"/>
+		<field name="amatAcc" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="TransmisoresAccionesHistorico" uuid="7d757663-a86b-4778-b5f9-23d7f52bc379">
+		<parameter name="casfim" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select *
+from tbl_transacciones_acciones_siti
+where casfim=$P!{casfim}]]>
+		</queryString>
+		<field name="ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="sector" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="casfim" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="folio_envio" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fecha_envio" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="tipo_persona" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="nacionalidad" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_paterno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_materno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="rfc" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="curp" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fecha_constitucion" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="porcentaje_tenencia_accionaria" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<variable name="tipo_persona" class="java.lang.String">
+			<variableExpression><![CDATA[$F{tipo_persona} == null ? ""
+:$F{tipo_persona}+", "]]></variableExpression>
+		</variable>
+		<variable name="nacionalidad" class="java.lang.String">
+			<variableExpression><![CDATA[$F{nacionalidad} == null ? ""
+:$F{nacionalidad}+", "]]></variableExpression>
+		</variable>
+		<variable name="nombre" class="java.lang.String">
+			<variableExpression><![CDATA[$F{nombre} == null ? ""
+:$F{nombre}+" "]]></variableExpression>
+		</variable>
+		<variable name="apaterno" class="java.lang.String">
+			<variableExpression><![CDATA[$F{apellido_paterno} == null ? ""
+:$F{apellido_paterno}+" "]]></variableExpression>
+		</variable>
+		<variable name="amaterno" class="java.lang.String">
+			<variableExpression><![CDATA[$F{apellido_materno} == null ? ""
+:$F{apellido_materno}+", "]]></variableExpression>
+		</variable>
+		<variable name="rfc" class="java.lang.String">
+			<variableExpression><![CDATA[$F{rfc} == null ? ""
+:$F{rfc}+", "]]></variableExpression>
+		</variable>
+		<variable name="curp" class="java.lang.String">
+			<variableExpression><![CDATA[$F{curp} == null ? ""
+:$F{curp}+", "]]></variableExpression>
+		</variable>
+		<variable name="tenencia" class="java.lang.String">
+			<variableExpression><![CDATA[$F{porcentaje_tenencia_accionaria} == null ? ""
+:$F{porcentaje_tenencia_accionaria}+"%"]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="BaseRegistro" uuid="02e56d73-57b5-46a3-9d08-3b88bf050a8f">
+		<parameter name="casfim" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select calle calleBR, numero_ext numExtBR, numero_int numIntBr, colonia colBR, municipio munBR, estado edoBR, cp cpBR
+from tbl_base_registro
+where casfim = $P!{casfim}]]>
+		</queryString>
+		<field name="calleBR" class="java.lang.String"/>
+		<field name="numExtBR" class="java.lang.String"/>
+		<field name="numIntBr" class="java.lang.String"/>
+		<field name="colBR" class="java.lang.String"/>
+		<field name="munBR" class="java.lang.String"/>
+		<field name="edoBR" class="java.lang.String"/>
+		<field name="cpBR" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="OficiaCumplimientoSitil" uuid="1aba066c-7b87-47d2-94c6-e63cce82469d">
+		<parameter name="casfim" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select nombre, apellido_paterno, apellido_materno
+from tbl_oficial_cumplimiento_siti
+where casfim = $P!{casfim}]]>
+		</queryString>
+		<field name="nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_paterno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_materno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="cccSiti" uuid="60da1580-c72a-4fc2-a95c-aef5c65ba25a">
+		<parameter name="casfim" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select *
+from tbl_ccc_siti
+where casfim = $P!{casfim}]]>
+		</queryString>
+		<field name="ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="sector" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="casfim" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="folio_envio" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fecha_envio" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="conforma_ccc" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="area_designada" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="cargo_ccc" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="categoria" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_paterno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_materno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="rfc" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="curp" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="cargo_sociedad" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="integrante_oficial_cumplimiento" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fecha_designacion_ccc" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="vigencia_31_diciembre_año_inmediato" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fecha_sustitucion_miembro_ccc" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="cccHist" uuid="6910bafa-52df-4f09-86aa-ca6c7caca083">
+		<parameter name="casfim" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{casfim}]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select nombre, apellido_paterno, apellido_materno,integracion_comite
+from tbl_ccc_historico
+where casfim = $P!{casfim}]]>
+		</queryString>
+		<field name="nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_paterno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_materno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="integracion_comite" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="ctrlSiti" uuid="e7f7eb03-fb95-4745-83ed-1662aa982738">
+		<parameter name="casfim" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select *
+from tbl_ctrl_siti
+where casfim = $P{casfim}]]>
+		</queryString>
+		<field name="ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="sector" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="casfim" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="folio_envio" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fecha_envio" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="tipo_persona" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="nacionalidad" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_paterno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_materno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="cargo_pgpec" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="rfc" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="curp" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="control_i" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="control_ii" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="control_iii" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="control_iv" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="tenencia_accionaria" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="integrante_grupo" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fecha_notificacion" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fecha_constitucion" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="ctrlHist" uuid="ceb27e37-15ac-4aa2-bac4-dd110afdca5f">
+		<parameter name="casfim" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select nombre, apellido_paterno, apellido_materno
+from tbl_ctrl_historico
+where casfim = 20001]]>
+		</queryString>
+		<field name="nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_paterno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_materno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="OficialCumplimientoHist" uuid="f43a3c35-9bc5-4cd6-828d-70642d22a98e">
+		<parameter name="casfim" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select oficial_cumplimiento_nombre, apellido_paterno, apellido_materno
+from tbl_oficial_cumplimiento_historico
+where casfim = 20001]]>
+		</queryString>
+		<field name="oficial_cumplimiento_nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_paterno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="apellido_materno" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="RepresentanteLegal" uuid="79e7e844-d95d-4226-8147-82b2dd22b5f5">
+		<parameter name="casfim" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select * from tbl_representante_legal
+where casfim = $P!{casfim}]]>
+		</queryString>
+		<field name="ID" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="sector" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="rfc" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="casfim" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="tipo_sociedad" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="periodo" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="folio_tramite" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fecha_solicitud" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="estatus" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fecha_resolucion" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="dias_transcurridos" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="prevenido" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="fecha_prevencion" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="numero_rechazos" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="representante_legal" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="correo_representante_legal" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="oficial_cumplimiento" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<group name="casfim">
+			<groupExpression><![CDATA[$F{casfim}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="comentarios" class="java.lang.String"/>
+	<parameter name="casfim" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sector" class="java.lang.String"/>
+	<parameter name="img" class="java.lang.String"/>
+	<parameter name="img2" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select T1.casfim,T1.sector,T1.denominacion,T1.estatus, T1.fecha_registro_inicial,T1.fecha_inicio_vigencial, T1.fecha_fin_vigencia,
+T1.calle calledg,T1.colonia coloniadg,
+T1.municipio mundg,
+T1.estado edodg,
+T1.codigo_postal cpdg,
+T1.estatus,
+T2.asociacion,
+t13.oficial_cumplimiento,
+T13.representante_legal,
+T14.denominacion_social_auditor,
+T14.nombre_auditor,
+T14.rfc_ext,
+t14.rfc_auditor,
+t14.telefono,
+t14.email,
+t14.domicilio,
+T14.sector,
+T14.fecha_envio,
+T14.periodo_inicio_auditoria,
+t14.periodo_fin_auditoria,
+T14.tipo_auditor
+from cnbv.tbl_datos_generales T1
+left join cnbv.tbl_asociaciones T2
+on T1.casfim = T2.casfim
+left join cnbv.tbl_base_registro T3
+on T1.casfim=T3.casfim
+left join cnbv.tbl_representante_legal T13
+on T1.casfim=T13.casfim
+left join cnbv.tbl_informe_auditoria T14
+on T1.casfim=T14.casfim
+where T1.casfim = $P!{casfim}
+group by casfim]]>
+	</queryString>
+	<field name="casfim" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sector" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="denominacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_registro_inicial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_inicio_vigencial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_fin_vigencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="calledg" class="java.lang.String"/>
+	<field name="coloniadg" class="java.lang.String"/>
+	<field name="mundg" class="java.lang.String"/>
+	<field name="edodg" class="java.lang.String"/>
+	<field name="cpdg" class="java.lang.Integer"/>
+	<field name="asociacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="oficial_cumplimiento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="representante_legal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="denominacion_social_auditor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_auditor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rfc_ext" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rfc_auditor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="domicilio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_envio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="periodo_inicio_auditoria" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="periodo_fin_auditoria" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_auditor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="denominacion_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{denominacion}]]></variableExpression>
+	</variable>
+	<variable name="tipo_Auditor" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tipo_auditor} == null ? ""
+: "Tipo:"+ $F{tipo_auditor}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="denominacion_social_auditor" class="java.lang.String">
+		<variableExpression><![CDATA[$F{denominacion_social_auditor} == null ? ""
+:" Den:"+$F{denominacion_social_auditor}]]></variableExpression>
+	</variable>
+	<variable name="rfc_ext" class="java.lang.String">
+		<variableExpression><![CDATA[$F{denominacion_social_auditor} == null ? ""
+:" RFC Ext:"+$F{rfc_ext}]]></variableExpression>
+	</variable>
+	<variable name="telefono" class="java.lang.String">
+		<variableExpression><![CDATA[$F{telefono} == null ? ""
+: " Tel:"+$F{telefono}]]></variableExpression>
+	</variable>
+	<variable name="email" class="java.lang.String">
+		<variableExpression><![CDATA[$F{email} == null ? ""
+: " E-mail:"+$F{email}]]></variableExpression>
+	</variable>
+	<variable name="domicilio" class="java.lang.String">
+		<variableExpression><![CDATA[$F{domicilio} == null ? ""
+: " Tel:"+$F{domicilio}]]></variableExpression>
+	</variable>
+	<variable name="nombre_auditor" class="java.lang.String">
+		<variableExpression><![CDATA[$F{nombre_auditor} == null ? "" : " Nom:"+$F{nombre_auditor}]]></variableExpression>
+	</variable>
+	<variable name="rfc_auditor" class="java.lang.String">
+		<variableExpression><![CDATA[$F{nombre_auditor} == null ? "" : " RFC Aud:"+$F{rfc_auditor}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="752" splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="75" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="705" splitType="Stretch">
+			<textField>
+				<reportElement x="45" y="126" width="82" height="20" uuid="0c0acb84-2554-4315-bea8-cc6ba4e2bff7"/>
+				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="106" width="41" height="20" uuid="d0bb5420-186d-4dee-8522-6e9f282af6d1"/>
+				<text><![CDATA[Estatus:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="137" y="126" width="100" height="20" uuid="b4255837-e736-4645-a053-d8eb9e77c55b"/>
+				<textFieldExpression><![CDATA[$F{fecha_registro_inicial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="137" y="96" width="100" height="30" uuid="fcfb091d-a7cd-44b1-97ff-2f761e63a1c2"/>
+				<text><![CDATA[Fecha de Resgistro Inicial:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="274" y="126" width="100" height="20" uuid="9d6670c3-cef1-45bc-8660-3004e7b35e52"/>
+				<textFieldExpression><![CDATA[$F{fecha_inicio_vigencial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="274" y="96" width="100" height="30" uuid="b50f7e57-77cf-49f3-923f-fac92d9a9f39"/>
+				<text><![CDATA[Fecha de Inicio de Vigencia:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="419" y="126" width="100" height="20" uuid="1f6ca770-9072-4b29-a6fa-3f7903014527"/>
+				<textFieldExpression><![CDATA[$F{fecha_fin_vigencia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="419" y="96" width="100" height="30" uuid="4b6d15ec-d607-4c47-964c-c26d6ccdd064"/>
+				<text><![CDATA[Fecha de Fin de Vigencia:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="104" y="172" width="464" height="28" uuid="aa9c4524-883c-4964-8a3d-fae4e242fdaa"/>
+				<textFieldExpression><![CDATA[$F{calledg}+", "+$F{coloniadg}+", "+
+$F{mundg}+", "+$F{edodg}+", "+$F{cpdg}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="45" y="172" width="59" height="28" uuid="41aa843e-5b50-4978-b948-fbf4ff64e9e4"/>
+				<text><![CDATA[Domicilio principal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="44" y="201" width="59" height="30" uuid="5c5ce2ce-2050-4004-b345-82b8e16e3397"/>
+				<text><![CDATA[Domicilio sucursulaes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="274" y="148" width="56" height="20" uuid="92cba12e-3b07-44d2-a0f3-b503dabaef12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Domicilio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="247" y="268" width="141" height="20" uuid="6b5acbb5-d39d-4e66-b1ce-f5ee8b6b1279"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Oficial de cumplimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="45" y="289" width="71" height="15" uuid="452b0738-b0ec-4c03-9307-a770c822d35b"/>
+				<text><![CDATA[Vigente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="237" y="317" width="171" height="20" uuid="6e63fd28-c139-4ea8-a1ce-593a2347b0ee"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comité de Comunicación y Control ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="44" y="337" width="80" height="15" uuid="c59e4708-484d-41b9-8113-914e18769026"/>
+				<text><![CDATA[Vigente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="238" y="367" width="171" height="20" uuid="838e69b9-29c5-49a2-8e42-f86d3fbb6842"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Personas que ejercen el Control]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="48" y="387" width="79" height="15" uuid="3b009ade-e35a-429e-9465-8f3486589ccc"/>
+				<text><![CDATA[Vigente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="42" y="421" width="92" height="27" uuid="7fffc8ea-6ffe-4246-a50a-672ca57b7eaa"/>
+				<text><![CDATA[Representante legal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="257" y="453" width="101" height="20" uuid="bf53ecae-2015-4d78-b928-3bbe8f369d4d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Informe de Auditoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="118" y="470" width="52" height="20" uuid="0cd3f510-dbc9-463b-9d12-636581e1fa5c"/>
+				<text><![CDATA[Periodo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="371" y="470" width="91" height="20" uuid="aa8502ca-d189-4cfa-8e93-22002d343884"/>
+				<text><![CDATA[Datos del Auditor]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="42" y="490" width="100" height="20" uuid="323fd77c-1754-410b-a768-33c05f51f85d"/>
+				<textFieldExpression><![CDATA[$F{periodo_inicio_auditoria} == null ? ""
+: "Inicio:"+$F{periodo_inicio_auditoria}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="147" y="490" width="100" height="20" uuid="641d758f-a9ca-4549-8742-f0ac0ea8197a"/>
+				<textFieldExpression><![CDATA[$F{periodo_fin_auditoria} == null ? ""
+ : "Fin:"+$F{periodo_fin_auditoria}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="257" y="490" width="311" height="85" uuid="53322621-8986-4e9e-b236-53dc505c3b74"/>
+				<textFieldExpression><![CDATA[$V{tipo_Auditor}+$V{denominacion_social_auditor}+$V{rfc_ext}
++$V{nombre_auditor}+$V{rfc_auditor}+$V{telefono}+$V{email}+$V{domicilio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="230" y="581" width="186" height="20" uuid="f49fa9c4-4cac-433f-8a14-c7b419282ed1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adeudos por Cuotas de Supervisión]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table" style="table 1" positionType="Float" x="188" y="601" width="249" height="20" uuid="bcac1d85-24eb-4f2a-aa57-49801333047e"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="adeudos" uuid="6ad48af8-75d1-4ee5-9226-ee9af78677d1">
+						<datasetParameter name="casfim">
+							<datasetParameterExpression><![CDATA[$P{casfim}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="129" uuid="6f0f61a3-9728-41e7-a2f4-7694b6cdeaf1">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="129" height="30" uuid="fb22b612-448a-46cf-9993-0ad4838f4d2b"/>
+								<textElement textAlignment="Center">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Ejercicio]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="129" height="30" uuid="83d45a8c-d817-4f15-a16d-6f43bbf4b9e1"/>
+								<textElement textAlignment="Center">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="129" height="30" uuid="1d047e1d-b244-466b-9739-62eff6d3c445"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{anio}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="119" uuid="858e9531-ae18-4c37-86d3-9d4e5e2470c6">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="119" height="30" uuid="f8387e12-ebd8-4042-baf9-dc7f65ba21be"/>
+								<textElement textAlignment="Center">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Monto]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="119" height="30" uuid="e7a72195-55ae-4018-8009-36721bbcf260"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$V{mtotal}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="119" height="30" uuid="53313aea-0335-4761-87d3-8242a8265c58"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" positionType="Float" x="44" y="233" width="259" height="34" isRemoveLineWhenBlank="true" uuid="f9d7b039-da77-4096-9e5a-15fa3e34bbad"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Accionistas" uuid="9b43a8b4-367c-457a-a1b1-d5c43d9db34c">
+						<datasetParameter name="casfim">
+							<datasetParameterExpression><![CDATA[$P{casfim}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="260" uuid="c0808da6-f6cd-47c3-a758-1845e16c8c6c">
+						<jr:columnHeader style="table 1_CH" height="17" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="260" height="17" uuid="9c03343c-3afa-48ac-a472-cae54e76ce68"/>
+								<textElement textAlignment="Center">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Accionistas]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="33" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="260" height="33" uuid="07ca8dd7-2cea-4dba-9d56-b45e5160d624"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{nomAcc}+" "+$F{apatAcc}+" "+$F{amatAcc}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" positionType="Float" x="303" y="233" width="265" height="34" isRemoveLineWhenBlank="true" uuid="545d5a36-fbfb-43f0-84ab-e1fe40e44b64"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="TransmisoresAccionesHistorico" uuid="aa3c4c13-5994-4475-a80b-97c64253190b">
+						<datasetParameter name="casfim">
+							<datasetParameterExpression><![CDATA[$P{casfim}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="265" uuid="7ee6dec2-ffcd-4c7c-8606-388e58d956d1">
+						<jr:columnHeader style="table 1_CH" height="18" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="265" height="18" uuid="b5425de2-aa72-4582-aa9c-2d1f68974206"/>
+								<textElement textAlignment="Center">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Transmisión de Acciones]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="33" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="265" height="33" uuid="7802b9b6-76a3-4928-ac94-444dd6195230"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$V{tipo_persona}+$V{nacionalidad}+$V{nombre}+
+$V{apaterno}+$V{amaterno}+$V{rfc}+$V{curp}+$V{tenencia}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" positionType="Float" x="104" y="201" width="464" height="31" uuid="2e3c1998-d1bb-4b8b-9705-b891b7df4ecd"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="BaseRegistro" uuid="c84f56b8-4d81-4cd0-9d84-81060cd85ef9">
+						<datasetParameter name="casfim">
+							<datasetParameterExpression><![CDATA[$P{casfim}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="463" uuid="4f138b82-d515-42ea-a99e-4e2f2b46dd59">
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="463" height="30" uuid="71536467-753b-4dbf-b259-b5f24ede6e02"/>
+								<textFieldExpression><![CDATA[$F{calleBR}+", "+$F{numExtBR}+" "+$F{numIntBr}+", "+$F{colBR}+", "+$F{munBR}
++", "+$F{edoBR}+", "+$F{cpBR}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" positionType="Float" x="124" y="337" width="444" height="29" uuid="293f6738-c97a-4b3e-8270-8e69f5d7d659"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="cccSiti" uuid="9e18151b-32bf-42b7-8fce-e1e1ace73e5a">
+						<datasetParameter name="casfim">
+							<datasetParameterExpression><![CDATA[$P{casfim}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="452" uuid="d98d63c5-d7df-4f7b-b696-bc3290bd1f62">
+						<jr:detailCell style="table 1_TD" height="28" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="452" height="28" uuid="463a7920-b003-431e-9aeb-54fd487eeaa5"/>
+								<textFieldExpression><![CDATA[$F{conforma_ccc}.equals("NO") ? "No Conforma CCC"
+:"Cargo: "+$F{cargo_ccc}+" Cat:"+$F{categoria}+" Nom:"+($F{nombre}+" "+$F{apellido_paterno}+
+    " "+$F{apellido_materno}+" RFC:"+$F{rfc})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" positionType="Float" x="127" y="387" width="441" height="27" uuid="f6f93138-3f1c-4650-9826-0192ade30251"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="ctrlSiti" uuid="5f388746-ce69-4ae6-890d-e2543491d128">
+						<datasetParameter name="casfim">
+							<datasetParameterExpression><![CDATA[$P{casfim}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="452" uuid="c6e588fa-654e-418d-9f5d-eba4e5df6371">
+						<jr:detailCell style="table 1_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="452" height="26" uuid="587c885f-00f2-4760-8c62-163b55cc6f99"/>
+								<textFieldExpression><![CDATA[" Cargo:"+$F{cargo_pgpec}+" Nombre:"+$F{nombre}+" "+$F{apellido_paterno}+" "+$F{apellido_materno}+" RFC:"+$F{rfc}+" Ten:"+
+$F{tenencia_accionaria}+"%"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement positionType="Float" x="290" y="623" width="68" height="15" uuid="a9e3d9f3-fa1d-4de5-b92f-d65dfa2b81d0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comentarios]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="103" y="638" width="441" height="59" uuid="fee7b80c-6d8f-4cdb-ac77-98cd3e6c381d"/>
+				<textFieldExpression><![CDATA[$P{comentarios}.equals("") ? "Cierre la ventana para insertar los comentarios"
+:$P{comentarios}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="42" y="50" width="82" height="29" uuid="05d86fba-d508-4a29-8795-c0ecd0878276"/>
+				<text><![CDATA[Denominacion Social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="28" width="41" height="20" uuid="1c6eadb9-eff5-41a6-958d-61804b38054f"/>
+				<text><![CDATA[Sector:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="134" y="28" width="169" height="20" uuid="77be1147-9734-47cf-b5f6-8f686d94c266"/>
+				<textFieldExpression><![CDATA[$F{sector}.equals("TR") ? "Transmisor de Dinero"
+:$F{sector}.equals("CC") ? "Centro Cambiario"
+:"SOFOM"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="314" y="28" width="82" height="20" uuid="d6f6e564-8ee2-4030-b4cf-9cf27059bb64"/>
+				<text><![CDATA[Clave catalogo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="396" y="29" width="100" height="20" uuid="1db8f2e4-d8a6-4fd2-b902-bc4e1301471a"/>
+				<textFieldExpression><![CDATA[$F{casfim}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="50" width="169" height="29" uuid="3a33b2b9-72ff-4a0c-8f12-8f56796df872"/>
+				<textFieldExpression><![CDATA[$F{denominacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="314" y="59" width="57" height="20" uuid="ffd45152-3159-4ebe-96be-75059d26519b"/>
+				<text><![CDATA[Asociacion:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="372" y="59" width="204" height="37" uuid="d589159e-5d6f-4578-8a4a-c145af519da4"/>
+				<textFieldExpression><![CDATA[$F{asociacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="433" y="9" width="42" height="20" uuid="717d2f64-2e27-45ef-805d-53de32073436"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="475" y="9" width="100" height="20" uuid="baf84db9-f651-4a2c-9eb9-f9eceb4a0b18"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="450" width="586" height="1" uuid="29c2f6d8-3eae-4802-b897-1a6ad8467f78"/>
+			</break>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" positionType="Float" x="118" y="287" width="452" height="29" uuid="0fa1568d-7e24-44f7-a7be-2be333025c27"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="RepresentanteLegal" uuid="636d689c-8096-464c-b070-2b8c67d13c61">
+						<datasetParameter name="casfim">
+							<datasetParameterExpression><![CDATA[$P{casfim}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="452" uuid="32e072a8-ef7a-4214-99cc-b746dd3cf6ab">
+						<jr:detailCell style="table 1_TD" height="28" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="452" height="28" uuid="22737f51-2c16-40d1-abd7-414bfb390eb3"/>
+								<textFieldExpression><![CDATA[$F{oficial_cumplimiento}.equals("") ? ""
+:$F{oficial_cumplimiento}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" positionType="Float" x="134" y="419" width="434" height="29" uuid="296aa27b-24ac-4063-b669-73bf3aa9086b"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="RepresentanteLegal" uuid="b62f8384-1e4d-41a0-ac1b-ab52dde636c3">
+						<datasetParameter name="casfim">
+							<datasetParameterExpression><![CDATA[$P{casfim}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="452" uuid="6b967b00-d8ec-4b09-a245-cd19f85ccf68">
+						<jr:detailCell style="table 1_TD" height="28" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="452" height="28" uuid="bb40520a-160f-4882-a94b-625ef2178062"/>
+								<textFieldExpression><![CDATA[$F{representante_legal}.equals("") ? ""
+:$F{representante_legal}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

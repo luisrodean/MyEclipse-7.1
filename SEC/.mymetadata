@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="SEC"
+  id="myeclipse.1331266796187"
+  context-root="/SEC"
+  j2ee-spec="5.0"
+  archive="SEC.war">
+  <attributes>
+    <attribute name="webrootdir" value="/web" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tree id="0">
+	
+	<item text="Alumno" id="listaCalificaciones" im0="Codigos_Razon.gif">
+		<userdata name="href">menuListaCalificaciones</userdata>
+	</item>
+	<item text="Aviso" id="Aviso" im0="Carga_Archivo.png">
+		<userdata name="href">menuListaCalificaciones</userdata>
+	</item>
+		
+</tree>

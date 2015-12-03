@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<tree id="0">
+
+	<item text="SITI" id="siti" im0="Carga_Archivo.png">
+		<userdata name="href">carga-archivo</userdata>
+	</item>
+	
+	<item text="Accionistas" id="accionistas" im0="Carga_Manual.png">
+		<userdata name="href">carga-archivo-man</userdata>
+	</item>
+
+		<item text="Adeudos" id="adeudos" im0="Carga_Archivo.png">
+		<userdata name="href">carga-archivo-debito</userdata>
+	</item>
+	
+	<item text="Asociaciones" id="asociaciones" im0="Carga_Manual.png">
+		<userdata name="href">carga-archivo-debito-man</userdata>
+	</item>
+	
+	<item text="OC" id="oc" im0="Carga_Archivo.png">
+		<userdata name="href">carga-archivo-oe-representacion</userdata>
+	</item>	
+	<item text="Base de Registro" id="baseRegistro" im0="Carga_Manual.png">
+		<userdata name="href">carga-archivo-oe-representacion-man</userdata>
+	</item>
+	
+	<item text="Base CTRL" id="baseCTRL" im0="Carga_Archivo.png">
+		<userdata name="href">carga-archivo-2311-acreedores</userdata>
+	</item>
+	
+	<item text="Datos Generales" id="datosGenerales" im0="Carga_Trabajo.png">
+		<userdata name="href">carga-trabajo</userdata>
+	</item>
+	<item text="CCC" id="ccc" im0="Carga_Trabajo.png">
+		<userdata name="href">carga-trabajo-debito</userdata>
+	</item>
+	<item text="Transaccion de Acciones" id="transaccionAcciones" im0="Carga_Trabajo.png">
+		<userdata name="href">carga-trabajo-ixe-credito</userdata>
+	</item>
+	
+</tree>

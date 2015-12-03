@@ -1,0 +1,46 @@
+#slider1_container{
+	position: relative; 
+	width: 600px; 
+	height: 300px;
+}
+
+#slides{
+	cursor: move; 
+	position: absolute;
+	left: 0px;
+	top: 0px; 
+	width:600px; 
+	height:300px; 
+	overflow: hidden;
+}
+#capa_1{
+	position: absolute; 
+	top: 250px; 
+	left: 0px;
+	width: 600px; 
+	height: 50px;
+}
+
+#capa_2{
+	position: absolute; 
+	top: 0px; 
+	left: 0px; 
+	width: 600px; 
+	height: 50px;
+	background-color: Black; 
+	opacity: 0.5; 
+	filter: alpha(opacity=50);
+}
+
+#capa_3{
+	position: absolute; 
+	top: 0px; 
+	left: 0px; 
+	width: 600px; 
+	height: 50px;
+    color: White; 
+    font-size: 16px; 
+    font-weight: bold; 
+    line-height: 50px; 
+    text-align: center;
+}

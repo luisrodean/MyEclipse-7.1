@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+   "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+   "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+   <definition name="baseLayout" template="/templates/layout.jsp">
+      <put-attribute name="title"  value="SEC"/>
+      <put-attribute name="header" value="/header.jsp"/>
+      <put-attribute name="menu"   value="/menu.jsp"/>
+      <put-attribute name="body"   value=""/>
+      <put-attribute name="footer"   value="/footer.jsp"/>
+   </definition>
+
+   <definition name="pantallaCargaCalificacion" extends="baseLayout">
+      <put-attribute name="title"  value="Carga de Archivos de Calificaciones"/>
+      <put-attribute name="body"   value="/carga-archivos-calificacion-main.jsp"/>      
+   </definition>
+   
+   <definition name="pantallaGestionUsuarios" extends="baseLayout">
+      <put-attribute name="title"  value="Gestion de Usuarios"/>
+      <put-attribute name="body"   value="/gestion-usuarios-main.jsp"/>      
+   </definition>
+   
+   <definition name="pantallaGestionCalificaciones" extends="baseLayout">
+      <put-attribute name="title"  value="Gestion de Calificaciones"/>
+      <put-attribute name="body"   value="/gestion-calificaciones-main.jsp"/>      
+   </definition>
+   
+   <definition name="pantallaDictamenCCambiario" extends="baseLayout">
+      <put-attribute name="title"  value="Dictamen Centro Cambiario"/>
+      <put-attribute name="body"   value="/reporte-centro-cambiario-main.jsp"/>      
+   </definition>
+   
+    <definition name="pantallaListaCalificaciones" extends="baseLayout">
+      <put-attribute name="title"  value="Lista de Calificaciones"/>
+      <put-attribute name="body"   value="/lista-calificaciones-main.jsp"/>      
+   </definition>
+   
+   <definition name="pantallaBuscar" extends="baseLayout">
+      <put-attribute name="title"  value="Buscar"/>
+      <put-attribute name="body"   value="/buscar-main.jsp"/>      
+   </definition>
+
+</tiles-definitions>

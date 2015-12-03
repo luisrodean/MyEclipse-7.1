@@ -1,0 +1,17 @@
+#Thu Dec 03 11:25:17 CST 2015
+LOGIN_CONFIG=C\:\\glassfish\\domains\\domain1/config/login.conf
+CONSOLE_APPBASE=com.genuitec.eclipse.easie.core.ValidatingDirectoryFieldEditor@d6edc7/lib/install/applications/com_sun_web_ui
+SECURITY_POLICY=C\:\\glassfish\\domains\\domain1/config/server.policy
+SUN_HOME=C\:\\glassfish
+SUN_CONFIG=C\:\\glassfish\\config
+CHAINED_JARS="javaee.jar,C\:/Program Files/Java/jdk1.6.0_13/lib/tools.jar,install/applications/jmsra/imqjmsra.jar,com-sun-commons-launcher.jar,com-sun-commons-logging.jar,../imq/lib/jaxm-api.jar,../imq/lib/fscontext.jar,../imq/lib/imqbroker.jar,../imq/lib/imqjmx.jar,../imq/lib/imqxm.jar,webservices-rt.jar,webservices-tools.jar,mail.jar,appserv-jstl.jar,jmxremote_optional.jar,SUNWjdmk/5.1/lib/jdmkrt.jar,activation.jar,appserv-rt.jar,appserv-admin.jar,appserv-cmp.jar,../updatecenter/lib/updatecenter.jar,../jbi/lib/jbi.jar,ant/lib/ant.jar,dbschema.jar"
+LIBRARY_PATH="C\:\\Program Files\\Java\\jdk1.6.0_13\\bin;C\:\\glassfish\\bin;C\:\\glassfish\\lib"
+SUN_DOMAIN=C\:\\glassfish\\domains\\domain1
+ENDORSED_DIRS="C\:\\glassfish/lib/endorsed"
+KEYSTORE=C\:\\glassfish\\domains\\domain1/config/keystore.jks
+eclipse.preferences.version=1
+EXT_DIRS="C\:\\Program Files\\Java\\jdk1.6.0_13/jre/lib/ext;C\:\\glassfish\\domains\\domain1/lib/ext;C\:\\glassfish/javadb/lib"
+JDK_INSTALLATION_NAME=jdk1.6.0_13_2
+TRUST_STORE=C\:\\glassfish\\domains\\domain1/config/cacerts.jks
+SERVER_ENABLEMENT=true
+JDK_HOME=C\:\\Program Files\\Java\\jdk1.6.0_13

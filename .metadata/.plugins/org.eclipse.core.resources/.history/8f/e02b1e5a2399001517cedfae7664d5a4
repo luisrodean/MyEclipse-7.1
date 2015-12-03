@@ -1,0 +1,14 @@
+<!--	SE REFERENCÍA UNA HOJA DE ESTILOS UTILIZADA PARA MATERIAL	-->
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>	
+
+<div id="bar" class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="pics/icons/salir.png" class="brand-logo">Logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="pics/icons/salir.png"><i class="material-icons">refresh</i></a></li>
+      </ul>
+    </div>
+  </nav>
+</div>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <!-- Configuracion de Tiles -->
+  <context-param>
+   <param-name>
+      org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG
+   </param-name>
+   <param-value>
+      /WEB-INF/tiles.xml
+   </param-value>
+  </context-param>
+
+  <listener>
+   <listener-class>
+      org.apache.struts2.tiles.StrutsTilesListener
+   </listener-class>
+  </listener>
+  <!-- Configuracion de Tiles -->
+  
+  <!-- Lanzador de procesos -->
+  <listener>
+    <listener-class> org.quartz.ee.servlet.QuartzInitializerListener </listener-class>
+  </listener>
+  <listener>
+    <listener-class> com.wellcom.quartz.QuartzListener </listener-class>
+  </listener>
+  <!-- FIN Lanzador de procesos -->
+   <!-- Inicia configuracion Jasperreports -->
+   <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ServletReporte</servlet-name>
+    <servlet-class>com.wellcom.jasperreport.ServletReporte</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ServletReporte</servlet-name>
+    <url-pattern>/servlet/ServletReporte</url-pattern>
+  </servlet-mapping>
+  <servlet>
+		<servlet-name>ImageServlet</servlet-name>
+		<servlet-class>net.sf.jasperreports.j2ee.servlets.ImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+		<servlet-name>ImageServlet</servlet-name>
+		<url-pattern>/servlets/image</url-pattern>
+  </servlet-mapping>
+	 <!-- Termina configuracion Jasperreports -->
+  
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  <filter>
+    <filter-name>struts2</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <context-param>
+    <description>Ubicación Reportes</description>
+    <param-name>UBICACION_REPORTES</param-name>
+    <param-value>reports</param-value>
+  </context-param>
+  <context-param>
+	<description>Dirección del servidor local de imagenes como url </description>
+	<param-name>SERV_IMG_LOCAL</param-name>
+	<param-value>http://10.255.198.61:38083</param-value>
+  </context-param>
+  <context-param>
+	<description>Dirección del servidor remoto de imagenes como url </description>
+	<param-name>SERV_IMG_REMOTO</param-name>
+	<param-value>https://aplcipm.prosa.com.mx/imgpmr</param-value>
+  </context-param>
+  <jsp-config>
+    <taglib>
+      <taglib-uri>/birt.tld</taglib-uri>
+      <taglib-location>/WEB-INF/report-engine/tlds/birt.tld</taglib-location>
+    </taglib>
+  </jsp-config>
+  <session-config>
+  	<session-timeout>15</session-timeout>
+  </session-config>
+    <resource-ref>
+    <res-ref-name>jdbc/ASRDBP</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+    <res-sharing-scope>Shareable</res-sharing-scope>                
+  </resource-ref>
+  
+  <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>restricted methods</web-resource-name>
+        <url-pattern>/*</url-pattern>
+        <http-method>TRACE</http-method>
+        <http-method>PUT</http-method>
+        <http-method>OPTIONS</http-method>
+        <http-method>DELETE</http-method>
+  	</web-resource-collection>
+    	<auth-constraint />
+  </security-constraint>
+   
+</web-app>
+

@@ -1,0 +1,55 @@
+package com.wellcom.hibernate.model;
+
+/**
+ * SecTblAlumnoGrupo entity. @author MyEclipse Persistence Tools
+ */
+
+public class SecTblAlumnoGrupo implements java.io.Serializable {
+
+	// Fields
+
+	private Integer idAlumnoGrupo;
+	private Integer idGrupo;
+	private Integer idAlumno;
+
+	// Constructors
+
+	/** default constructor */
+	public SecTblAlumnoGrupo() {
+	}
+
+	/** full constructor */
+	public SecTblAlumnoGrupo(Integer idAlumnoGrupo, Integer idGrupo,
+			Integer idAlumno) {
+		this.idAlumnoGrupo = idAlumnoGrupo;
+		this.idGrupo = idGrupo;
+		this.idAlumno = idAlumno;
+	}
+
+	// Property accessors
+
+	public Integer getIdAlumnoGrupo() {
+		return this.idAlumnoGrupo;
+	}
+
+	public void setIdAlumnoGrupo(Integer idAlumnoGrupo) {
+		this.idAlumnoGrupo = idAlumnoGrupo;
+	}
+
+	public Integer getIdGrupo() {
+		return this.idGrupo;
+	}
+
+	public void setIdGrupo(Integer idGrupo) {
+		this.idGrupo = idGrupo;
+	}
+
+	public Integer getIdAlumno() {
+		return this.idAlumno;
+	}
+
+	public void setIdAlumno(Integer idAlumno) {
+		this.idAlumno = idAlumno;
+	}
+
+}

@@ -1,0 +1,44 @@
+package com.wellcom.hibernate.model;
+
+/**
+ * SecTblMateria entity. @author MyEclipse Persistence Tools
+ */
+
+public class SecTblMateria implements java.io.Serializable {
+
+	// Fields
+
+	private String idMateria;
+	private String nombreMateria;
+
+	// Constructors
+
+	/** default constructor */
+	public SecTblMateria() {
+	}
+
+	/** full constructor */
+	public SecTblMateria(String idMateria, String nombreMateria) {
+		this.idMateria = idMateria;
+		this.nombreMateria = nombreMateria;
+	}
+
+	// Property accessors
+
+	public String getIdMateria() {
+		return this.idMateria;
+	}
+
+	public void setIdMateria(String idMateria) {
+		this.idMateria = idMateria;
+	}
+
+	public String getNombreMateria() {
+		return this.nombreMateria;
+	}
+
+	public void setNombreMateria(String nombreMateria) {
+		this.nombreMateria = nombreMateria;
+	}
+
+}

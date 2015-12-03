@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<tree id="0">
+	<item text="Imprimir Calificaciones" id="centrosCambiarios" im0="Administracion.png">
+		<userdata name="href">menuDictamenCCambiario</userdata>
+	</item>
+</tree>

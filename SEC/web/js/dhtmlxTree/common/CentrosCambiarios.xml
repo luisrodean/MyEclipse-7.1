@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<tree id="0">
+
+	<item text="Accionistas" id="accionistas" im0="Carga_Archivo.png">
+		<userdata name="href">carga-archivo-op-peticion</userdata>
+	</item>	
+	<item text="Adeudos" id="adeudos" im0="Carga_Manual.png">
+		<userdata name="href">carga-archivo-op-man</userdata>
+	</item>
+	
+	<item text="Asociaciones" id="asociaciones" im0="reproceso.jpg">
+		<userdata name="href">carga-archivo-op-reproceso</userdata>
+	</item>
+	
+	<item text="Datos Generales" id="datosGenerales" im0="Atendidas.png">
+		<userdata name="href">carga-archivo-op-atendidas</userdata>
+	</item>
+	
+	<item text="Base de Registro" id="baseRegistro" im0="Web.png">
+		<userdata name="href">carga-archivo-op-peticion-web</userdata>
+	</item>
+	
+	<item text="CCC" id="ccc" im0="Carga_Trabajo.png">
+		<userdata name="href">carga-trabajo-op</userdata>
+	</item>
+	
+	<item text="CTRL" id="ctrl" im0="Carga_Trabajo.png">
+		<userdata name="href">carga-trabajo-op</userdata>
+	</item>		
+	
+	<item text="Informe de Auditoria" id="informeAuditoria" im0="Carga_Trabajo.png">
+		<userdata name="href">carga-trabajo-op</userdata>
+	</item>
+	
+	<item text="Oficial de Cumplimiento" id="oficialCumplimiento" im0="Carga_Trabajo.png">
+		<userdata name="href">carga-trabajo-op</userdata>
+	</item>	
+	
+	<item text="Representante Legal" id="representanteLegal" im0="Carga_Trabajo.png">
+		<userdata name="href">carga-trabajo-op</userdata>
+	</item>
+	
+	<item text="Transacciones de Acciones" id="cargaTrabajo" im0="Carga_Trabajo.png">
+		<userdata name="href">carga-trabajo-op</userdata>
+	</item>
+</tree>

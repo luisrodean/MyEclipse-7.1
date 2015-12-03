@@ -1,0 +1,44 @@
+package com.wellcom.hibernate.model;
+
+/**
+ * SecTblCiclo entity. @author MyEclipse Persistence Tools
+ */
+
+public class SecTblCiclo implements java.io.Serializable {
+
+	// Fields
+
+	private Integer idCiclo;
+	private String ciclo;
+
+	// Constructors
+
+	/** default constructor */
+	public SecTblCiclo() {
+	}
+
+	/** full constructor */
+	public SecTblCiclo(Integer idCiclo, String ciclo) {
+		this.idCiclo = idCiclo;
+		this.ciclo = ciclo;
+	}
+
+	// Property accessors
+
+	public Integer getIdCiclo() {
+		return this.idCiclo;
+	}
+
+	public void setIdCiclo(Integer idCiclo) {
+		this.idCiclo = idCiclo;
+	}
+
+	public String getCiclo() {
+		return this.ciclo;
+	}
+
+	public void setCiclo(String ciclo) {
+		this.ciclo = ciclo;
+	}
+
+}

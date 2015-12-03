@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<doc>
+    <LDAPAUTH>
+        <ADMCONNECT>
+            <FACTORY value="com.sun.jndi.ldap.LdapCtxFactory"/>
+            <URL value="ldap://10.255.220.67:1389/"/>
+            <AUTHENTICATION value="simple"/>
+            <INITIALCONTEXT value="o=prosa.com.mx,o=isp"/>
+            <PROTOCOL value=""/>
+            <ADMUSER value="cn=IdentitySSO,ou=People,o=isp"/>
+            <!--ADMPASSWORD value="La6kw.wvvp3"/-->
+            <ADMPASSWORD value="Id3nt1tyss0"/>
+        </ADMCONNECT>
+        <PEOPLE value=""/>
+        <APPLICATION value="ou=ABW,ou=Aplicaciones"/>
+    </LDAPAUTH>
+</doc>
+
+<!-- DESARROLLO - YA NO SIRVE 
+
+<doc>
+
+    <LDAPAUTH>
+
+        <ADMCONNECT>
+
+            <FACTORY value="com.sun.jndi.ldap.LdapCtxFactory"/>
+
+            <URL value="ldap://10.255.220.67:1389/"/>
+
+            <AUTHENTICATION value="simple"/>
+
+            <INITIALCONTEXT value="o=prosa.com.mx,o=isp"/>
+
+            <PROTOCOL value=""/>
+
+            <ADMUSER value="cn=IdentitySSO,ou=People,o=isp"/>
+
+            <ADMPASSWORD value="La6kw.wvvp3"/>
+
+        </ADMCONNECT>
+
+        <PEOPLE value=""/>
+
+        <APPLICATION value="ou=cas,ou=Aplicaciones"/>
+
+    </LDAPAUTH>
+
+</doc>
+
+ -->
+
+<!-- PRODUCCION
+
+<doc>
+
+  <LDAPAUTH>
+
+    <ADMCONNECT>
+
+        <FACTORY value="com.sun.jndi.ldap.LdapCtxFactory"/>
+
+        <URL value="ldap://10.255.197.20:1389/"/>
+
+        <AUTHENTICATION value="simple"/>
+
+        <INITIALCONTEXT value="o=prosa.com.mx,o=isp"/>
+
+        <PROTOCOL value=""/>
+
+    </ADMCONNECT>
+
+    <PEOPLE value=""/>
+
+    <APPLICATION value="ou=GIC,ou=Aplicaciones"/>
+
+</LDAPAUTH>
+
+</doc>
+
+-->
+
+
+
+<!-- DESARROLLO
+
+<doc>
+
+  <LDAPAUTH>
+
+    <ADMCONNECT>
+
+        <FACTORY value="com.sun.jndi.ldap.LdapCtxFactory"/>
+
+        <URL value="ldap://localhost:390/"/>
+
+        <AUTHENTICATION value="simple"/>
+
+        <INITIALCONTEXT value="o=wellcom,c=mx"/>
+
+        <PROTOCOL value=""/>
+
+    </ADMCONNECT>
+
+    <PEOPLE value=""/>
+
+    <APPLICATION value="ou=gic,ou=Aplicaciones"/>
+
+</LDAPAUTH>
+
+</doc>
+
+-->

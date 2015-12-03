@@ -1,0 +1,78 @@
+#login {
+	width: 470px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:100px;
+	position: relative;
+}
+
+#head_login {
+	width: 470px;
+	height: 90px;
+	/*background-image: url(../pics/cnbv/top-login.jpg);*/
+	background-repeat: no-repeat;
+	/* margin: 80px 0 2px 0;*/ 
+}
+
+#barRojo {
+	width: 100%;
+	background-color: #fff;
+	color:#555;
+	text-align:center;
+	font-size:large;	
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#barRojoDark {
+	width: 100%;
+	background-color: #fff;
+	color:#ooo;
+	text-align:right;
+}
+
+#contenido {
+	width: 80%;
+	background-color: #F1F1F1;
+    border-radius: 5px;
+	color:#000;
+	text-align:center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Formulario */
+
+form {
+	align:left;
+	}
+label {
+	display:block;
+	font-weight:bold;
+	font-size:large;
+	}
+.textInput {
+	width:100px;
+	font-size:large;
+	}
+input {
+    line-height: 30px;
+	width:100%;
+    font-size:medium;
+}
+#btnAccept{
+	height:30px;
+	width:100%;
+}
+#btnAccept{
+	width:100%;
+    line-height: 30px;
+    margin-top: 10px;
+}
+#div_form{
+	margin-left:auto;
+	margin-right:auto;
+	width:80%;
+}
