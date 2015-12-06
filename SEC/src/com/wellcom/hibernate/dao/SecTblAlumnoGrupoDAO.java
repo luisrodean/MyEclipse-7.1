@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.eclipse.birt.report.soapengine.api.G_Info;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;
 
 import com.wellcom.hibernate.model.SecTblAlumnoGrupo;
+import com.wellcom.hibernate.model.SecTblGrupo;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -138,4 +140,19 @@ public class SecTblAlumnoGrupoDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	/**
+	 * Metodos Personalizados
+	 */
+	
+	public Integer getIdAlumnoGrupo(String id_alumno, String grupo){
+		Integer id= null;
+		
+		//obtiene id_grupo
+		Integer id_grupo = new SecTblGrupoDAO().getIdGrupo(grupo);
+		
+		
+		return id;
+	}
+	
 }

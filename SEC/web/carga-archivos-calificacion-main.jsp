@@ -34,9 +34,11 @@
 	 if(!ga.AccessGranted(session, "grantAccess"))  
 	     response.sendRedirect("login.jsp");
 
-%>
+	String usuarioActivo = (String)session.getAttribute("usuarioActivo");
+	String valorRol = null;
+	if(session.getAttribute("rolAccVal")!=null)
+		valorRol = session.getAttribute("rolAccVal").toString();
 
-<%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
@@ -67,6 +69,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
        <script type="text/javascript">	
        		var remesaDif;
+       		var valorRol;
+       		
 			$(document).ready(function(){	
 				$( "#divImagen" ).hide();
 				$( "#advert-rem" ).hide();
@@ -78,11 +82,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 				
 			});
+			
+			
 			$( document ).ajaxSuccess(function(){
 			
 				alert("Se completo la carga!");
 			});
 			
+		function validarUsuario(){
+			valorRol=<%=valorRol%>
+			if(valorRol==3){			
+			}else{
+				alert("Se necesitan permisos de Administrador\npara acceder a estas opciones");
+				return;
+		 	}
+		}
+		
+		
 			function parpadear(){ 
 				  $('#divImagen').fadeIn(500).delay(800).fadeOut(500,parpadear);
 			}
@@ -118,9 +134,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							dataType	: "html",
 							type 		: "POST",
 							processData	: false,
-							data 		: params
+							data 		: params,
+							id_escuela	: valorRol
 				});
-				
+								
 			}
 
 	</script>

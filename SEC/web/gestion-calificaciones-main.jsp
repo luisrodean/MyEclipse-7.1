@@ -39,12 +39,9 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
- 	<head>
-		<!--	SE REFERENCÍA UNA HOJA DE ESTILOS UTILIZADA POR Wellcom		-->
-		<link rel="stylesheet" type="text/css" href="css/styles.css" ></link>	
+		<!--	SE REFERENCÍA UNA HOJA DE ESTILOS UTILIZADA POR Wellcom		
+		<link rel="stylesheet" type="text/css" href="css/styles.css" ></link>-->
 		<!-- 	SE HABILITA EL USO DE jQuery-UI Y SE ASIGNA EL TEMA	-->			
 		<sj:head jqueryui="true" locale="es" jquerytheme="pepper-grinder" compressed="true" debug="true"></sj:head>
 		<!-- 	SE AGREGAN LAS LIBRERIAS QUE SE UTILICEN PARA LOS EFECTOS VISUALES DE LA PÁGINA		-->	
@@ -64,6 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--  AQUI VA LA PARTE DE JAVASCRIPT (jQuery)-->
 		<script type="text/javascript">
 		var varToggleFiltros;
+		var calificacion;
 
 		var bandBusqueda=0;
 		
@@ -76,9 +74,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					//alert(settings.url);
 					if(settings.url.match('ajaxAbcCalificaciones')!=null){
 						mostrarMensaje(request);
-						//setInterval(function(){location.reload();} ,3000);
-						//buscar();
-						//$('#gridListaUsuarios').trigger("reloadGrid");
 						
 					}
 				});
@@ -139,7 +134,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					buscar();
 					bandRecharge=0;
 				}else{
-					$('#gridListaUsuarios').trigger("reloadGrid");
+					$('#gridListaCalificaciones').trigger("reloadGrid");
 				 }
 			}
 			
@@ -206,7 +201,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					-- Marca del Cambio : WELL-JMQ-P-02-0271-13 Finaliza la Modificacion 16/12/2013 -
 					-------------------------------------------------------------------------------*/
 			}
+
+			function EnvioABC(){			
+				if(validarFormulario()){	
+					nombre=$("#VabcNombre").val();
+				
+					$.getJSON("ajaxABC",{
+						// Establecemos los parámetros
+						 calificacion		:calificacion
+					}).error(function() {
+						window.location = 'login.jsp';
+					});
+					// Volvemos a cargar el grid
+					$('#gridListaCalificaciones').trigger("reloadGrid");
+				}
+			}
 			
+			function poppupOpen(){
+				$("#vista_abc").show();
+				// Damos formato a la Ventana de Diálogo    
+	    		$('#dialogo').dialog({
+	    			title: operacion,
+			        // Indica si la ventana se abre de forma automática
+	        		autoOpen: true,
+			        // Indica si la ventana es modal
+	        		modal: true,
+			        // Largo
+			        width: 350,
+	        		// Alto
+	        		height: 200,
+			        // Creamos los botones
+	        		buttons: {
+	           			'Aceptar': function() {
+		                	EnvioABC();
+		                	$(this).dialog( "close" );
+	            		},
+			          	Cerrar: function() {
+	               			// Cerrar ventana de diálogo
+	                		$(this).dialog( "close" );
+	                		$("#vista_abc").hide();
+	            		} 
+	        		}
+	    		});
+			}
+
+			function Formulario(oper){
+			//asigna titulo al formulario
+			operacion = oper;
+			
+			switch(operacion){		
+				case 'Editar Calificacion':
+					//Validar si hay una fila seleccionada
+					if($("#gridListaCalificaciones").jqGrid('getGridParam','selrow')!=null){
+					
+						//recupera fila selecionada y datos de las columnas
+						s = $("#gridListaCalificaciones").jqGrid('getGridParam','selrow');
+						id=$("#gridListaCalificaciones").jqGrid('getCell',s,'id');
+						calificacion=$("#gridListaCalificaciones").jqGrid('getCell',s,'calificacion');
+					
+						//asigna valores al formulario
+						document.getElementById('VabcCalificacion').value=calificacion;
+						
+						//Abre ventana emergente
+						poppupOpen();	
+					
+					}else{
+						alert("Seleccione una materia");
+					}
+				break;
+				}
+			}	
+						
 			/*
 			---------------------------------------------------------------
 			3.- Función que despliega el mensaje de la operación realizada
@@ -231,8 +296,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 
 		</script>
-	</head>  
-	<body>
+<center>
 		<div id="tituloTab" >Gestión de Calificaiones</div>
    		<br/>
    		 
@@ -256,42 +320,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- 	A PARTIR DE AQUÍ SE CARGA LA TABLA DE USUARIOS POR MEDIO DE JQUERY -->		
 			<sjg:grid
 						id			="gridListaCalificaciones"			gridModel	="gridListaCalificaciones"
-						href		="ajaxLlenarTablaCalificaciones"		dataType	="json"        
+						href		="ajaxLlenarTablaCalificaciones"	dataType	="json"        
 						caption		="Lista de Calificaciones"			altRows		="true"								
-						pager		="true"							pagerInput	="false"
-						pagerButtons="true"							rowList		="10, 20,30,40"
-						rowNum		="10"							rownumbers	="true"
-						navigator	="true"							viewrecords	="true"
-						hidegrid	="false"						multiselect	="true"
-						navigatorRefresh="false"					navigatorSearch="false"				
-						resizable	="true"							editurl		="ajaxAbcCalificaciones" 
-						navigatorAddOptions="{closeAfterAdd:true, closeAfterSubmit:true}"
-						navigatorEditOptions="{reloadAfterSubmit:true}"
+						pager		="false"							pagerInput	="false"
+						pagerButtons="false"							rowList		="10, 20,30,40"
+						rowNum		="10"								rownumbers	="true"
+						navigator	="true"								viewrecords	="true"
+						hidegrid	="false"							multiselect	="false"
+						navigatorRefresh="false"						navigatorSearch="false"				
+						resizable	="true"								navigatorAdd="false"
+						navigatorDelete="false"							navigatorEdit="false"
 						navigatorExtraButtons	= 
 						"{
-							Filtros : { 
-								title : 'Mostrar/Ocultar Filtros', 
-								icon: 'ui-icon-search', 
-								onclick: function() { toggleFiltros() }
+							Editar : { 
+								title : 'Editar Calificacion', 
+								icon: 'ui-icon-pencil', 
+								onclick: function() { Formulario('Editar Alumno') }
 								} 
-						}"
-			>
-				<sjg:gridColumn name="idCalificacion" key="true" title="Hidden" 		hidden="true" 			sortable="false" />
-				<sjg:gridColumn name="idAlumno" title="Hidden" 		hidden="true" 			sortable="false" />
-				
-				<sjg:gridColumn id="materia" name="materia"			title="Materia"		index="materia"		sortable="true"	width="150"/>
+						}"	>
+						
+				<sjg:gridColumn name="id_calificacion" key="true" title="Hidden" 		hidden="true" 			sortable="false" />
+				<sjg:gridColumn name="ciclo" title="Hidden" 		hidden="true" 			sortable="false" />
+				<sjg:gridColumn id="grupo" name="grupo"			title="Grupo"		index="grupo"		sortable="true"	width="50"/>
+				<sjg:gridColumn id="nombre"  name="nombre"	title="Nombre"  index="nombre"	sortable="true"	width="100"
+								editable="true"/>
+				<sjg:gridColumn id="apellido_paterno"  name="apellido_paterno"	title="Apellido Paterno"  index="apellido_paterno"	sortable="true"	width="100"
+								editable="true"/>
+				<sjg:gridColumn id="apellido_materno"  name="apellido_materno"	title="Apellido Materno"  index="apellido_materno"	sortable="true"	width="100"
+								editable="true"/>
+				<sjg:gridColumn id="nombre_materia"  name="nombre_materia"	title="Materia"  index="nombre_materia"	sortable="true"	width="100"
+								editable="true"/>
+				<sjg:gridColumn id="periodo"  name="periodo"	title="Periodo"  index="periodo"	sortable="true"	width="50"
+								editable="true"/>
+				<sjg:gridColumn id="calificacion"  name="calificacion"	title="Calificacion"  index="calificacion"	sortable="true"	width="70"
+								editable="true"/>
 								
-				<sjg:gridColumn id="periodo1"  name="periodo1"	title="Periodo 1"  index="periodo1"	sortable="true"	width="150"
-								editable="true"/>
-				<sjg:gridColumn id="periodo2"  name="periodo2"	title="Periodo 2"  index="periodo2"	sortable="true"	width="150"
-								editable="true"/>
-				<sjg:gridColumn id="periodo3"  name="periodo3"	title="Periodo 3"  index="periodo3"	sortable="true"	width="150"
-								editable="true"/>
-																																
-				<sjg:gridColumn id="calificacion"  name="calificacion"	title="Calificacion"  index="calificacion"	sortable="true"	width="150"
-								editable="true"/>
-				
 			</sjg:grid>
 		</div>
-  	</body>
+		
+			<sj:dialog 
+		id="dialogo"
+       	autoOpen="false"
+       	resizable="false">
+        <!-- 	CON ESTA ETIQUETA SE DESPLIEGA UNA VISTA PARA ADMINISTRAR UN ALUMNO-->
+        <div id="vista_abc" style="display:none;">
+			<br/>
+			Calificacion				<input type="text" id="VabcCalificacion" name="VabcCalificacion" maxlength="30" /> <br/>
+		</div>
+	</sj:dialog>
+	
+</center>
+  	
 </html>

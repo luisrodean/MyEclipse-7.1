@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.TimeZone;
+import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.Cell;
@@ -17,8 +17,15 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.wellcom.hibernate.dao.SecTblPeriodoDAO;
-import com.wellcom.hibernate.dao.TblParametrosDAO;
+import com.lowagie.text.List;
+import com.wellcom.hibernate.dao.SecTblAlumnoGrupoDAO;
+import com.wellcom.hibernate.dao.SecTblGrupoDAO;
+import com.wellcom.hibernate.dao.SecTblParametrosDAO;
+import com.wellcom.hibernate.model.SecTblAlumno;
+import com.wellcom.hibernate.model.SecTblAlumnoGrupo;
+import com.wellcom.hibernate.model.SecTblEscuela;
+import com.wellcom.hibernate.model.SecTblParametros;
+import com.wellcom.hibernate.model.SecTblPeriodo;
 
 public class LecturaArchivoCarga {
 	SimpleDateFormat formato = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
@@ -28,7 +35,9 @@ public class LecturaArchivoCarga {
 	private String instanceRoot;
 	private String ur;
 	private ArrayList<String> casfimList;
+	private String[] NombreArchivo;
 	
+
 	StringBuffer dato = new StringBuffer();
 	
 	//******************************DAO*****************//
@@ -42,7 +51,15 @@ public class LecturaArchivoCarga {
 	public LecturaArchivoCarga() {
 		
 	}
+	
+	public String[] getNombreArchivo() {
+		return NombreArchivo;
+	}
 
+	public void setNombreArchivo(String[] nombreArchivo) {
+		NombreArchivo = nombreArchivo;
+	}
+	
 	public int getRegistros() {
 		return registros;
 	}
@@ -89,7 +106,130 @@ public class LecturaArchivoCarga {
 		this.ur = ur;
 	}
 	
+
 	public Boolean Xlsx(File inputFile,String nombre) {
+		/*System.out.println("-->Procesando archivo de carga");
+		
+		Integer numCell=0,numrow=0,hoja=0;
+        // For storing data into CSV files
+        StringBuffer data = new StringBuffer();
+        File outputFile = new File(instanceRoot+ur+nombre);
+
+        try {
+        	//escribe datos en el cvs
+            FileOutputStream fos = new FileOutputStream(outputFile);
+            //contador para libros de archivo
+            XSSFWorkbook wBook = new XSSFWorkbook(new FileInputStream(inputFile));
+            //contador para hoojas de archivo
+            XSSFSheet sheet = wBook.getSheetAt(0);
+
+            
+            System.out.println("---> Numero de hojas "+wBook.getNumberOfSheets());
+            
+            Row row;
+            Cell cell;
+            
+            //repite el ciclo hasta que llega al total de hojas
+            while(hoja<wBook.getNumberOfSheets()){
+            	//inicializa numero de hoja con el contador hoja
+            	sheet = wBook.getSheetAt(hoja);
+            	hoja++;
+            	//crea iterador para recorrer filas
+	            Iterator<Row> rowIterator = sheet.iterator();                        
+	
+	            //repite el ciclo hasta que no encuentre filas 
+	            while (rowIterator.hasNext()) {
+	            	//asigna el numero de la fila
+	            	row = rowIterator.next();
+	            	numrow++;
+	            	//Creacion de Lista
+	            	Map<String,String> lista = null;
+	            	
+	            	//IF PARA NO LEER LOS TITULOS DE LAS COLUMNAS
+	            	if(row.getRowNum()!=0){
+	            	System.out.println("---> Numero de registros " + row.getRowNum());
+	            	numCell=0;
+	            	
+		            // POR CADA FILA SE ITERAN LAS CELDAS
+		            Iterator<Cell> cellIterator = row.cellIterator();
+		            
+		            	while (cellIterator.hasNext()) {
+		            	
+		                    cell = cellIterator.next();
+		                    numCell++;
+		                 
+		                    //IF PARA SELECCIONAR LAS CELDAS A CARGAR o leer
+		                    if (numCell==1 || numCell==2 || numCell==6 || numCell==7 ){
+		                    	switch(numCell){
+		                    	case 1:		//Celda id ciclo
+		                    		//data.append((int) cell.getNumericCellValue() + "|");
+		                    		byte[] b = cell.getStringCellValue().toUpperCase().replaceAll("\n", " ").trim().getBytes("UTF-8");
+		                    		String decoded = new String(b, "UTF-8");
+		                    		lista.put("Id_ciclo", decoded + "|");
+		                    		break;
+		                    	case 2:		//Celda id alumno
+		                    		
+		                    		//Busca IdAlumno-Grupo
+		                    		Integer id_grupo = new SecTblGrupoDAO().getIdGrupo(getNombreArchivo()[2]);
+		                       		Integer idAlumno = (int) cell.getNumericCellValue();
+		                       		//data.append(idAlumno+"-"+ id_grupo +"|");
+		                       		lista.put("Id_alumno_grupo", idAlumno+"-"+ id_grupo +"|");
+		                       		
+		                    		break ;
+		                    	case 6:		//Celda id periodo
+		                    		//data.append((int) cell.getNumericCellValue() + "|");
+		                    		lista.put("Id_periodo", (int) cell.getNumericCellValue() + "|");
+		                    		break;
+		                    	case 7:		//Celda calificacion
+		                    		//data.append((int) cell.getNumericCellValue() + "|");
+		                    		lista.put("Id_calificacion", (int) cell.getNumericCellValue() + "|");
+		                    		break;
+		                    	default:
+		                    		
+		                    		switch(cell.getCellType()){
+		                    		case Cell.CELL_TYPE_BLANK:
+
+				                    	System.out.println("Fila"+numrow+"Celda vacia"+numCell);
+				                            data.append(" " + "|");
+				                            break;
+		                    		default:
+				                    	System.out.println("DEFAULT----->Fila"+numrow+"Celda vacia"+numCell);
+				                            data.append(" " + "|");
+				                            
+		                    		}
+		                    		
+		                    	}
+		                    	
+			                    			
+				                    	System.out.println("Fila"+numrow+"Celda vacia"+numCell);
+				                            data.append(" " + "|");
+			
+				                    
+				                    	System.out.println("DEFAULT----->Fila"+numrow+"Celda vacia"+numCell);
+				                            data.append(" " + "|");
+			                    }
+		                 	}
+		            	}
+	            		System.out.println("DEFAULT----->Fila   "+lista.get("Id_periodo") + lista.get("Id_ciclo") + lista.get("Id_alumno_grupo") + '\n');
+
+		            	data.append(lista.get("Id_periodo") + lista.get("Id_ciclo") + lista.get("Id_alumno_grupo") + '\n'); 
+		            }
+	            }
+
+        	System.out.println("Numero de filas procesadas:"+numrow);
+        	setRegistros(numrow-1);
+        	setRegistrosSi(numrow-1);
+            fos.write(data.toString().getBytes());
+            fos.close();
+            System.out.println("TERMINO LA LECTURA DEL ARCHIVO XLSX Y LA ESCRITURA DEL ARCHIVO SCV!!");
+            return true;
+        } catch (Exception ioe) {
+            ioe.printStackTrace();
+            return false;
+        }
+        
+        */
+        
 		System.out.println("-->Procesando archivo de carga");
 		
 		Integer numCell=0,numrow=0,hoja=0;
@@ -103,10 +243,7 @@ public class LecturaArchivoCarga {
             XSSFWorkbook wBook = new XSSFWorkbook(new FileInputStream(inputFile));
             
             XSSFSheet sheet = wBook.getSheetAt(0);
-
-            
-            System.out.println("---> Numero de hojas "+wBook.getNumberOfSheets());
-            
+            //System.out.println("Numero de hojas!!!!!"+wBook.getNumberOfSheets());
             Row row;
             Cell cell;
             
@@ -122,7 +259,6 @@ public class LecturaArchivoCarga {
 	            	numrow++;
 	            	//IF PARA NO LEER LOS TITULOS DE LAS COLUMNAS
 	            	if(row.getRowNum()!=0){
-	            	System.out.println("---> Numero de registros " + row.getRowNum());
 	            	numCell=0;
 		            // POR CADA FILA SE ITERAN LAS CELDAS
 		            Iterator<Cell> cellIterator = row.cellIterator();
@@ -132,21 +268,31 @@ public class LecturaArchivoCarga {
 		                    cell = cellIterator.next();
 		                    numCell++;
 		                    
-		                    //IF PARA SELECCIONAR LAS CELDAS A CARGAR
-		                    if (numCell==1 && numCell==2 && numCell==6 && numCell==7 ){
+		                    //if (numCell==1 && numCell==3 && numCell==4 && numCell==5 ){//IF PARA SELECCIONAR LAS CELDAS A CARGAR
 			                    switch (cell.getCellType()){
 		
 				                    case Cell.CELL_TYPE_NUMERIC:
-				                    	Double d =cell.getNumericCellValue();
-					                    data.append( d.longValue() +"|");   
+
+				                    	 Double d =cell.getNumericCellValue();
+				                    	if (numCell==3){//Celda periodo
+				                    		//String idPeriodo = DAOPERIODO.obteneridperiodo(d);
+					                     //data.append(idPeriodo+"|");
 				                            
-					                    break;
+				                    	} else if(numCell==4){//Celda ciclo
+				                    		//String idPeriodo = DAOCICLO.obteneridperiodo(d);
+						                     //data.append(idPeriodo+"|");
+				                                  
+			                    	  	}else{
+				                    		 data.append( d.longValue() +"|");
+			                    	  	}
+					                        
+				                            break;
 			
 				                    case Cell.CELL_TYPE_STRING:	
 				                    	
 				                    		byte[] b = cell.getStringCellValue().toUpperCase().replaceAll("\n", " ").trim().getBytes("UTF-8");
 				                    		String decoded = new String(b, "UTF-8");
-				                    		data.append(decoded+"|");
+				                    		data.append(decoded + "|");
 				                    		
 				                            break;
 			
@@ -160,13 +306,11 @@ public class LecturaArchivoCarga {
 				                    	System.out.println("DEFAULT----->Fila"+numrow+"Celda vacia"+numCell);
 				                            data.append(" " + "|");
 			                    }
-		                 	}
+		                 	//}
 		            	}
 		            	data.append('\n'); 
 		            }
-	            }
-            }
-
+	            }}
         	System.out.println("Numero de filas procesadas:"+numrow);
         	setRegistros(numrow-1);
         	setRegistrosSi(numrow-1);
@@ -181,7 +325,7 @@ public class LecturaArchivoCarga {
     }
 	
 	public Boolean adeudosXlsx(File inputFile,String nombre) {
-		System.out.println("-->Procesando archivo de carga Adeudos");
+		System.out.println("-->Procesando archivo de carga de calificaciones");
 		
 		Integer numCell=0,numrow=2,lastId=0;
         // For storing data into CSV files

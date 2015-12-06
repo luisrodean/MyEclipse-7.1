@@ -1,8 +1,8 @@
-#Thu Dec 03 11:30:29 CST 2015
+#Sun Dec 06 13:53:50 CST 2015
 Glassfish2Server.SEC.contextRoot=/SEC
 Glassfish2Server.SEC.shouldOverwrite=false
-Glassfish2Server.SEC.isDeployed=true
-Glassfish2Server.SEC.shouldBackup=false
+Glassfish2Server.SEC.isDeployed=false
+Glassfish2Server.SEC.shouldBackup=true
 Glassfish2Server.SEC.deploymentPath=C\:\\glassfish\\domains\\domain1\\autodeploy\\SEC.war
 Glassfish2Server.SEC.earProjectName=
 Glassfish2Server.SEC.isExploded=true

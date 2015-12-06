@@ -1,12 +1,18 @@
 package com.wellcom.hibernate.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Example;
 
+import com.wellcom.hibernate.model.GridCalificacion;
 import com.wellcom.hibernate.model.SecTblCalificacion;
 
 /**
@@ -139,6 +145,53 @@ public class SecTblCalificacionDAO extends BaseHibernateDAO {
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
+		}
+	}
+	
+	/**
+	 * Metodos personalizados
+	 */
+	
+	public List<GridCalificacion> getGrid(String escuela){
+		
+		String query = "SELECT id_calificacion, (id_ciclo)ciclo ,(G.grupo)grupo, (A.nombre)nombre, (A.apellido_paterno)apellido_p," +
+			"(A.apellido_materno)apellido_m, (M.nombre_materia)materia, (id_periodo)periodo, calificacion"+
+			"FROM sec_tbl_escuela AS E ,sec_tbl_calificacion AS C,sec_tbl_alumno_grupo AS AG "+
+			",sec_tbl_alumno AS A,sec_tbl_profesor AS P,sec_tbl_materia AS M "+
+			",sec_tbl_profesor_materia AS PME,sec_tbl_grupo AS G WHERE "+
+			"C.id_alumno_grupo = AG.id_alumno_grupo AND C.id_profesor_materia = PME.id_profesor_materia "+
+			"AND E.id_escuela = '"+ escuela +"' ORDER BY grupo and A.nombre";
+		
+		List<GridCalificacion> resultado = new ArrayList<GridCalificacion>();
+		
+		try{
+		
+			System.out.println(query);
+			SQLQuery queryObject = getSession().createSQLQuery(query);
+			
+			queryObject.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			
+			List rs = queryObject.list();
+			for(int i=0; i<rs.size() ;i++){
+				Map registro = (Map) rs.get(i);
+				 GridCalificacion grid = new GridCalificacion();
+				 
+				 grid.setId_calificacion(registro.get("id_calificacion").toString());
+				 grid.setCiclo(registro.get("ciclo").toString());
+				 grid.setGrupo(registro.get("grupo").toString());
+				 grid.setNombre(registro.get("nombre").toString());
+				 grid.setApellido_paterno(registro.get("apellido_p").toString());
+				 grid.setApellido_materno(registro.get("apellido_m").toString());
+				 grid.setNombre_materia(registro.get("materia").toString());
+				 grid.setPeriodo(registro.get("periodo").toString());
+				 grid.setCalificacion(registro.get("id").toString());
+				 
+				resultado.add(grid);
+			}
+			return resultado;
+		}catch(Exception e){
+		System.err.println(e.getMessage());
+		return null;
 		}
 	}
 }

@@ -12,12 +12,9 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Actions;
 import org.apache.struts2.convention.annotation.Result;
 
-import com.wellcom.hibernate.dao.SecTblCalificacionesDAO;
+import com.wellcom.hibernate.dao.SecTblCalificacionDAO;
 import com.wellcom.hibernate.dao.SecTblUsuariosDAO;
-import com.wellcom.hibernate.model.AbstractSecTblCalificaciones;
-import com.wellcom.hibernate.model.AbstractSecTblUsuarios;
-import com.wellcom.hibernate.model.SecTblCalificaciones;
-import com.wellcom.hibernate.model.SecTblUsuarios;
+import com.wellcom.hibernate.model.GridCalificacion;
 
 
 public class GestionCalificaciones extends CoreAction {
@@ -52,7 +49,7 @@ public class GestionCalificaciones extends CoreAction {
 	
 
 	// Almacena la tabla de usuarios desordenada, tal y como viene de sesión o de un find hacia la bd
-	private List<AbstractSecTblCalificaciones>	listaCalificaciones;
+	private List<GridCalificacion>	listaCalificaciones;
 	public 	String event;
 	
 	/*
@@ -129,9 +126,9 @@ public class GestionCalificaciones extends CoreAction {
 			//System.out.println("Nombre y SIDX "+sidx+sord);
 			//objComparator			= new TblAbwParametrosComp(sidx.isEmpty()?"nombre":sidx,sord);
 			// Creamos un nuevo TreeSet pasando como parámetro el Comparator creado
-			gridListaCalificaciones	= new ArrayList<AbstractSecTblCalificaciones>();
+			gridListaCalificaciones	= new ArrayList<GridCalificacion>();
 			// Agregamos todos los registros de lista de la tabla de Parametroses
-			for(AbstractSecTblCalificaciones temp : listaCalificaciones){// Se realiza implícitamente la ordenación por el 
+			for(GridCalificacion temp : listaCalificaciones){// Se realiza implícitamente la ordenación por el 
 				//System.out.println("---------------->"+temp.getNombre());
 				gridListaCalificaciones.add(temp);
 			}// tipo de collection que se utiliza -> TreeSet		// tipo de collection que se utiliza -> TreeSet
@@ -142,7 +139,7 @@ public class GestionCalificaciones extends CoreAction {
 	private void obtenerTabla()
 	{
 		// Obtenemos la lista de la sesión
-		listaCalificaciones = (List<AbstractSecTblCalificaciones>) session.get("listaCalificaciones");
+		listaCalificaciones = (List<GridCalificacion>) session.get("listaCalificaciones");
 		
 		if(listaCalificaciones==null)
 			records = total = 0;
@@ -166,7 +163,7 @@ public class GestionCalificaciones extends CoreAction {
 			// Calculamos el final de los registros a mostrar
 			hasta = page*rows>records?records-1:page*rows-1;
 			
-			Iterator<AbstractSecTblCalificaciones> it = gridListaCalificaciones.iterator();
+			Iterator<GridCalificacion> it = gridListaCalificaciones.iterator();
 	
 			// Quitamos los registros del TreeSet que no se vayan a desplegar en el jQuery grid del jsp
 			if(it.hasNext())
@@ -240,18 +237,18 @@ public class GestionCalificaciones extends CoreAction {
 	private void modificar(String idCalificacion)
 	{
 		try{
-			SecTblCalificacionesDAO califDao = new SecTblCalificacionesDAO();
+			SecTblCalificacionDAO califDAO = new SecTblCalificacionDAO();
 			System.out.println("Modificar Datos--------------->");
 			System.out.println("Identificador a Modifiacar: "+idCalificacion);
 			//Se crea el objeto usuario a guardar
-			SecTblCalificaciones calificacionM = new SecTblCalificaciones();
+	/*		GridCalificacion calificacionM = new GridCalificacion();
 			calificacionM.setIdCalificacion(Integer.valueOf(idCalificacion));
 			calificacionM.setIdAlumno(idAlumno);
 			calificacionM.setCalificacion(calificacion);
 			calificacionM.setMateria(materia);
 			
-			califDao.merge(calificacionM);
-			
+			califDAO.merge(calificacionM);
+			*/
 			// Establecemos el mensaje a mostrar en la pantalla .jsp
 			operResult = "Usuario modificado satisfactoriamente";
 			event="Alta de Usuario";
@@ -297,11 +294,11 @@ public class GestionCalificaciones extends CoreAction {
 	})
 	public String buscarCalificaciones()
 	{
-		SecTblCalificacionesDAO califDAO = new SecTblCalificacionesDAO();
+		SecTblCalificacionDAO califDAO = new SecTblCalificacionDAO();
 		
 		if(validarSesion()){
 			System.out.println("Entro al action de Buscar");
-			session.put("listaCalificaciones", califDAO.findByFilters(filtroIdAlumno));
+		//	session.put("listaCalificaciones", califDAO.findByFilters(filtroIdAlumno));
 		    return SUCCESS;
 		}else{
 			redireccionarAlLogin("Gestion Calificaciones");
@@ -316,7 +313,7 @@ public class GestionCalificaciones extends CoreAction {
 	// Este objeto se encarga de realizar la ordenación 
 	//private RolesUsuariosComp		objComparator;
 	// Lista ordenada de los elementos de la tabla de usuarios (debe ser Collection obligatoriamente)  
-	private ArrayList<AbstractSecTblCalificaciones>	gridListaCalificaciones;
+	private ArrayList<GridCalificacion>	gridListaCalificaciones;
 	// Indica cuantas filas queremos mostrar (Atributo 'rowNum' en el grid del jsp)  
 	private int 	rows;  
 	// Total de páginas necesarias para mostrar los registros obtenidos
@@ -344,7 +341,7 @@ public class GestionCalificaciones extends CoreAction {
 	 * Aqui vienen los getters y setters del jQuery Grid
 	 * 
 	 */
-	public ArrayList<AbstractSecTblCalificaciones> getGridListaCalificaciones()
+	public ArrayList<GridCalificacion> getGridListaCalificaciones()
 	{
 		return gridListaCalificaciones;
 	}

@@ -1,6 +1,6 @@
-#Thu Dec 03 11:25:17 CST 2015
+#Sun Dec 06 13:53:51 CST 2015
 LOGIN_CONFIG=C\:\\glassfish\\domains\\domain1/config/login.conf
-CONSOLE_APPBASE=com.genuitec.eclipse.easie.core.ValidatingDirectoryFieldEditor@d6edc7/lib/install/applications/com_sun_web_ui
+CONSOLE_APPBASE=com.genuitec.eclipse.easie.core.ValidatingDirectoryFieldEditor@6dd984/lib/install/applications/com_sun_web_ui
 SECURITY_POLICY=C\:\\glassfish\\domains\\domain1/config/server.policy
 SUN_HOME=C\:\\glassfish
 SUN_CONFIG=C\:\\glassfish\\config
@@ -11,7 +11,7 @@ ENDORSED_DIRS="C\:\\glassfish/lib/endorsed"
 KEYSTORE=C\:\\glassfish\\domains\\domain1/config/keystore.jks
 eclipse.preferences.version=1
 EXT_DIRS="C\:\\Program Files\\Java\\jdk1.6.0_13/jre/lib/ext;C\:\\glassfish\\domains\\domain1/lib/ext;C\:\\glassfish/javadb/lib"
-JDK_INSTALLATION_NAME=jdk1.6.0_13_2
+JDK_INSTALLATION_NAME=jdk1.6.0_13
 TRUST_STORE=C\:\\glassfish\\domains\\domain1/config/cacerts.jks
 SERVER_ENABLEMENT=true
 JDK_HOME=C\:\\Program Files\\Java\\jdk1.6.0_13

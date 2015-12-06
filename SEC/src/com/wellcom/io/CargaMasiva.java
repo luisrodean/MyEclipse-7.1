@@ -1,12 +1,8 @@
 package com.wellcom.io;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
-import com.wellcom.hibernate.dao.TblParametrosDAO;
-
+import com.wellcom.hibernate.dao.SecTblParametrosDAO;
 
 
 public class CargaMasiva {
@@ -30,7 +26,7 @@ public class CargaMasiva {
 	
 	private final LecturaArchivoCarga lector = new LecturaArchivoCarga();
 	//private final HerramientasDAO herr = new HerramientasDAO();
-	private final TblParametrosDAO parametro = new TblParametrosDAO();
+	private final SecTblParametrosDAO parametro = new SecTblParametrosDAO();
 	
 	public CargaMasiva(String p, String u, String tns, String ip, String ur,
 			String url, String instanceRoot, String carga,
@@ -178,25 +174,37 @@ public class CargaMasiva {
 		this.registrosSi = registrosSi;
 	}
 	
-	public Boolean CargarArchivo() {
+	public Boolean CargarArchivo(String archivoFileName) {
+		System.out.println("\n\n---> entro a Cargar Archivo");
 		instanceRoot = System.getProperty("com.sun.aas.instanceRoot");
-		filtroCatalogos = "sec_tbl_calificacion.csv";
 		// ****************PARAMETROS PARA LA CARGA *************************** //
-		TblParametrosDAO param = new TblParametrosDAO();
-		
+		SecTblParametrosDAO param = new SecTblParametrosDAO();
+		System.out.println("\n\n---> entro a SecTblParametrosDAO");
+
 		u = param.getParametro("USER_DB");
 		p = param.getParametro("PASSWORD_DB");
 		tns = param.getParametro("DB_NAME");
 		ip = param.getParametro("HOST");
 		ur = param.getParametro("DIRECTORIO-WEB");
 		rutaDB = param.getParametro("DIRECTORIO_MYSQL");
+		filtroCatalogos = param.getParametro("filtroCatalogos");
+		
 		// ******************************************************************* //
 		
+		//valida que el archivo contenga datos
 		if (archivo != null) {
+			System.out.println("\n\n---> archivo no nulo ");
 			lector.setInstanceRoot(instanceRoot);
 			lector.setUr(ur);
-							
+			//Lee titulo del archivo y obtiene los ids
+			lector.setNombreArchivo(archivoFileName.split("_" , 3));
+			for(int i=0;i<lector.getNombreArchivo().length;i++){
+				System.out.println("\n\n---> nombre archivo " + i + " : " + lector.getNombreArchivo()[i]);
+			}
+			
+			System.out.println("\n\n---> termina de separa nombre del archivo ");
 			if(lector.Xlsx(archivo,filtroCatalogos)){
+				System.out.println("\n\n---> archivo correcto ");
 				loader = new Loader();
 				loader.escribirBat(rutaDB, instanceRoot+ur, filtroCatalogos, ip, u, p, tns);
 				registros = lector.getRegistros();
@@ -204,6 +212,7 @@ public class CargaMasiva {
 				registrosNo = lector.getRegistrosNo();
 				return true;
 			}else{
+				System.out.println("\n\n---> archivo nulo ");
 				return false;
 			}			
 		}

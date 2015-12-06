@@ -4,8 +4,13 @@ package com.wellcom.actions;
 import java.io.File;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Actions;
+import org.apache.struts2.convention.annotation.Result;
 
 import com.wellcom.io.CargaMasiva;
 import com.wellcom.io.LecturaArchivoCarga;
@@ -20,7 +25,9 @@ public class CargaArchivoCalificacion extends CoreAction {
 	//Filtros
 	private String filtroCentrosCam;
 	private File archivo;
+	private String id_escuela;
 	
+
 	//Variables para el resultado de la carga
 	private int registros;
 	private int registrosNo;
@@ -35,6 +42,15 @@ public class CargaArchivoCalificacion extends CoreAction {
 
 		public void setFiltroCentrosCam(String filtroCentrosCam) {
 			this.filtroCentrosCam = filtroCentrosCam;
+		}
+
+
+		public String getId_escuela() {
+			return id_escuela;
+		}
+
+		public void setId_escuela(String id_escuela) {
+			this.id_escuela = id_escuela;
 		}
 
 		public File getArchivo() {
@@ -79,22 +95,25 @@ public class CargaArchivoCalificacion extends CoreAction {
 
 		public String execute(){
 			session.put("pos", "a4");	
-			System.out.println("\n\n---> Entro carga archivo execute Calificaciones");
+			System.out.println("\n\n---> Entro carga archivo execute Calificacion");
 			return "pantallaCargaCalificacion";
 		}
-		
-
+	
 		public String cargaArchivoCalificacion(){
-			System.out.println("\n\n---> Entro a carga de calificaciones");
-
+			System.out.println("\n\n---> Entro a carga de calificacion");
+			
+			System.out.println("\n\n---> nombre archivo :    " + archivoFileName);
+		//	System.out.println("\n\n---> usuario actual :    " + getUsusario());
+			
 			CargaMasiva carga = new CargaMasiva(archivo, null,null);
+			System.out.println("\n\n---> Entra a carga de archivo");
+
 			try{
-				if(carga.CargarArchivo()){
+				if(carga.CargarArchivo(archivoFileName)){
 					System.out.println("Carga de los archivos exitosa!!");
 					registros = carga.getRegistros();
 					registrosSi = carga.getRegistrosSi();
-					registrosNo = carga.getRegistrosNo();
-					
+					registrosNo = carga.getRegistrosNo();		
 				}else{
 					System.out.println("Fallo la carga de los archivos!!");
 				}

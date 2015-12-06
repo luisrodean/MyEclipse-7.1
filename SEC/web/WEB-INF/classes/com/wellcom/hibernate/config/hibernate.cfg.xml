@@ -38,6 +38,8 @@
 	<mapping resource="com/wellcom/hibernate/config/SecTblRol.hbm.xml" />
 	<mapping
 		resource="com/wellcom/hibernate/config/SecTblUsuario.hbm.xml" />
+	<mapping
+		resource="com/wellcom/hibernate/config/SecTblParametros.hbm.xml" />
 </session-factory>
 
 </hibernate-configuration>

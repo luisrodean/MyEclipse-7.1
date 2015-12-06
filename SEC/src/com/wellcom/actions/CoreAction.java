@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 import org.apache.commons.logging.Log;
 import org.apache.log4j.xml.DOMConfigurator;
@@ -21,6 +22,7 @@ import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
+import org.eclipse.birt.report.soapengine.api.GetUpdatedObjectsResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,7 +67,6 @@ abstract class CoreAction 	extends 	ActionSupport
 	}
 
 	protected boolean validarSesion(){
-		
 		return (new GrantAccess().AccessGranted(request.getSession(), "grantAccess"));
 	}
 	

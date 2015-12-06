@@ -1,11 +1,14 @@
 package com.wellcom.hibernate.dao;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Example;
 
 import com.wellcom.hibernate.model.SecTblGrupo;
@@ -141,4 +144,32 @@ public class SecTblGrupoDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	/**
+	 * Metodos personalizados
+	 */
+
+
+	public Integer getIdGrupo(String grupo){
+		Integer id = null;
+		
+		try{
+			String query = "select (id_grupo)ID from sec_tbl_grupo where grupo = '" + grupo + "'"; 
+			System.out.println(query);
+			SQLQuery queryObject = getSession().createSQLQuery(query);
+			
+			queryObject.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			
+			List rs = queryObject.list();
+			Map registro = (Map) rs.get(0);
+			id = Integer.parseInt(registro.get("ID").toString());
+			System.out.println("\n--------->id Grupo:  " + id);
+			return id;
+		}catch(Exception e){
+			e.getMessage();
+			return id;
+		}
+		
+	}
+	
 }
